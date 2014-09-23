@@ -1,1 +1,0 @@
-The full command is r.js -o lib/build.js which should be run from the js directory.

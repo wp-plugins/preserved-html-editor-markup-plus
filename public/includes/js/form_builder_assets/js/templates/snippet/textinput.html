@@ -1,5 +1,0 @@
-<!-- Text input-->
-<li class="control-group">
-  <label class="control-label" for="<%= id.replace(/[^-a-zA-Z0-9,&\s]+/ig, '').replace(/-/gi, "_").replace(/\s/gi, "-") %>"><% if(label) {%><%= label %><% } %></label>
-  <input id="<%= id.replace(/[^-a-zA-Z0-9,&\s]+/ig, '').replace(/-/gi, "_").replace(/\s/gi, "-") %>" name="<%- id %>" type="text" <% if(placeholder) {%>placeholder="<%- placeholder %>"<% } %> class="input-xlarge <% if(required) {%> required <% } %>" />
-</li>
