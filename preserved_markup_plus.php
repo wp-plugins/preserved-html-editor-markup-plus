@@ -109,6 +109,7 @@ class MP_WP_Preserved_Markup {
         $init['fix_table_elements'] = false;
         $init['verify_html'] = false;
         $init['setup'] = 'emc2_tinymce_init';
+        $init['allow_script_urls'] = true;
 
         /*
            Allow for html5 anchor tags
