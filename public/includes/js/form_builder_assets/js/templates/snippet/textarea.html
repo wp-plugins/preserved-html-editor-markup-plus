@@ -1,5 +1,0 @@
-<!-- Textarea -->
-<li class="control-group">
-  <label class="control-label" for="<%= id.replace(/[^-a-zA-Z0-9,&\s]+/ig, '').replace(/-/gi, "_").replace(/\s/gi, "-") %>"><% if(label) {%><%= label %><% } %></label>           
-  <textarea id="<%= id.replace(/[^-a-zA-Z0-9,&\s]+/ig, '').replace(/-/gi, "_").replace(/\s/gi, "-") %>" name="<%- id %>" <% if(placeholder) {%>placeholder="<%- placeholder %>"<% } %> class="<% if(required) {%> required <% } %>" ></textarea>
-</li>
