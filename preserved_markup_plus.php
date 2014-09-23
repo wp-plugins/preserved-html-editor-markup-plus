@@ -1,15 +1,13 @@
 <?php
 
 /*
-Plugin Name: Preserved HTML Editor Markup
+Plugin Name: Preserved HTML Editor Markup Plus
 Plugin URI: http://www.marcuspope.com/wordpress/
 Description: A Wordpress Plugin that preserves HTML markup in the TinyMCE editor, especially when switching between
 html and visual tabs.  Also adds support for HTML5 Block Anchors.
-Author: Marcus E. Pope, marcuspope
+Author: Marcus E. Pope, marcuspope, Jason Rosenbaum, J-Ro
 Author URI: http://www.marcuspope.com
 Version: 1.5.1
-
-Copyright 2011 Marcus E. Pope (email : me@marcuspope.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
