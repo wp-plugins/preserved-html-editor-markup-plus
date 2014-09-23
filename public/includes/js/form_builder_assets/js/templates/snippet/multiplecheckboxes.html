@@ -1,0 +1,17 @@
+<!-- Multiple Checkboxes -->
+<li class="control-group checkbox_group_wrap">
+  <label class="control-label check_radio_label"><% if(label) {%><%= label %><% } %></label>  
+  <span class="controls check_radio_field"><% _.each(checkboxes, function(checkbox, key){ %>
+    <label class="checkbox">
+    	<% if(typeof(checkbox.split('|')[1]) !== 'undefined') {%>
+    	<input type="checkbox" name="<%- name %>_<%- checkbox.split('|')[1] %>" value="1" class="<% if(required) { %> required_checkboxes <% } %> checkbox_group">
+    	<%= checkbox.split('|')[0] %>
+		<% } else { %>
+		<input type="checkbox" name="<%- name %>_<%- checkbox %>" value="1" class="<% if(required) { %> required_checkboxes <% } %> checkbox_group">
+		<%= checkbox %>
+		<% } %>
+    </label>
+    <% }); %>
+  </span>
+</li>
+    

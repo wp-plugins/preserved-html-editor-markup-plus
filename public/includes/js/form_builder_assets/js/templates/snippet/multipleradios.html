@@ -1,0 +1,15 @@
+<!-- Multiple Radios -->
+<li class="control-group">
+  <label class="control-label check_radio_label"><% if(label) {%><%= label %><% } %></label>  
+  <span class="controls check_radio_field"><% _.each(radios, function(radio, i){ %>
+    <label class="radio">
+    	<% if(typeof(radio.split('|')[1]) !== 'undefined') {%>
+    	<input type="radio" name="<%- name %>" value="<%- radio.split('|')[1] %>"  class="<% if(required) {%> required <% } %>">
+		<%= radio.split('|')[0] %>
+		<% } else { %>
+		<input type="radio" name="<%- name %>" value="<%- radio %>"  class="<% if(required) {%> required <% } %>">
+		<%= radio %>
+		<% } %>
+    </label><% }); %>
+  </span>
+</li>
