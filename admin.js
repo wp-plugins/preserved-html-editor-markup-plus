@@ -260,7 +260,7 @@
             o.data = o.data.replace(/\/\/ \]\]>/g, "");
             
             //now decode newlines and tabs
-            o.data = o.data.replace(/<\!--mep-nl-->/g, "\r\n").replace(/<\!--mep-tab-->/g, "    ");
+            o.data = o.data.replace(/(\r?\n|\s)?<\!--mep-nl-->/g, "\r\n").replace(/\s?<\!--mep-tab-->/g, "    ");
             
             //Fix broken >, <, &, etc symbols when they exist inside quote marks inside tag elements
             o.data = fix_intra_tag_content("&amp;", o.data, "{-mep-amp}", "&");
@@ -322,7 +322,7 @@
 
             //now: replace any newline characters with a custom mep html comment as a marker for where
             //newline chars should be added back in when we're done
-            o.data = o.unfiltered.replace(/(\r\n|\n)/g, "<!--mep-nl-->").replace(/(\t|\s\s\s\s)/g, "<!--mep-tab-->");
+            o.data = o.unfiltered.replace(/(\r?\n)/g, "$1<!--mep-nl-->").replace(/(\t|\s\s\s\s)/g, " <!--mep-tab-->");
 
             //finally: restore the whitespace back in pre & code tags
             o.data = o.data.replace(/<mep-preserve-nl>/g, "\n").replace(/<mep-preserve-tab>/g, "\t").replace(/<mep-preserve-space>/g, " ");
