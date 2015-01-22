@@ -69,7 +69,7 @@
                 }
             });
             
-            if (tinymce.isIE) {
+            if (tinymce.isIE && tinymce.addUnload) {
                 tinymce.addUnload(function() {
                     ed.forceBlocks._previousFormats = 0; // Fix IE leak
                 });

@@ -7,7 +7,7 @@ Description: A Wordpress Plugin that preserves HTML markup in the TinyMCE editor
 html and visual tabs.  Also adds support for HTML5 Block Anchors.
 Author: Marcus E. Pope, marcuspope, Jason Rosenbaum, J-Ro
 Author URI: http://www.marcuspope.com
-Version: 1.5.1
+Version: 1.5.2
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -110,6 +110,12 @@ class MP_WP_Preserved_Markup {
         $init['verify_html'] = false;
         $init['setup'] = 'emc2_tinymce_init';
         $init['allow_script_urls'] = true;
+		$init['cleanup_on_startup'] = false;
+		$init['cleanup'] = false;
+		$init['validate_children'] = false;
+		$init['remove_redundant_brs'] = false;
+	
+		$init['entities'] = '160,nbsp';	
 
         /*
            Allow for html5 anchor tags
@@ -179,8 +185,8 @@ class MP_WP_Preserved_Markup {
             //the html mode.  FIXME: assuming four spaces is bad mmkay, what if I like only two spaces for a tab?
             //and this could produce bad markup if a user had <p    class="test">hello</p> in their markup.  So
             //work on a more flexible /\s/g approach when \s is inside or outside a tag definition
-            $c = preg_replace("/(\r\n|\n)/", "<!--mep-nl-->", $c); //preserve new lines
-            $c = preg_replace("/(\t|\s\s\s\s)/", "<!--mep-tab-->", $c); //preserve indents
+            $c = preg_replace("/(\r?\n)/", "\n<!--mep-nl-->", $c); //preserve new lines
+            $c = preg_replace("/(\t|\s\s\s\s)/", " <!--mep-tab-->", $c); //preserve indents
 
             //Now we can restore all whitespace originally escaped in pre & code tags
             $c = preg_replace("/<mep-preserve-nl>/m", "\n", $c);
@@ -207,8 +213,8 @@ class MP_WP_Preserved_Markup {
         //issue was caused by a js error in that function that resulted in nothing being stripped out before it was
         //posted to the server here:
         if (isset($post['post_content'])) {
-            $post['post_content'] = preg_replace('/<\!--mep-nl-->/m', "\r\n", $post['post_content']);
-            $post['post_content'] = preg_replace('/<\!--mep-tab-->/m', "    ", $post['post_content']);
+            $post['post_content'] = preg_replace('/(\r?\n|\s)?<\!--mep-nl-->/m', "\r\n", $post['post_content']);
+            $post['post_content'] = preg_replace('/\s?<\!--mep-tab-->/m', "    ", $post['post_content']);
             $post['post_content'] = preg_replace_callback(
                 '/<code style=[\'"]display: none;[\'"]><!--[\s\S]*?--><\/code>/m',
                 array(
@@ -305,7 +311,7 @@ class MP_WP_Preserved_Markup {
         $plugin_data = get_plugin_data(__FILE__);
         $cachebuster = $plugin_data['Version'];
         
-        wp_enqueue_script('emc2-pm-admin-js', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__))."admin.js?v=".$cachebuster);
+        wp_enqueue_script('emc2-pm-admin-js', plugins_url("admin.js?v=".$cachebuster, __FILE__));
         //wp_enqueue_script('emc2-pm-admin-js', WP_PLUGIN_URL.'/sb_preserved_markup/admin.js');
         
         //provide nonce for ajax calls
