@@ -58,6 +58,8 @@ If you used version 1.0 or 1.1 to create content, do not use the Fix it features
 1. No screenshots
 
 == Changelog ==
+= 1.5.2 =
+* Fixes for a few issues, including handling newlines in HTML, handling comments, handling secure sites, and handling IE10 javascript errors.
 = 1.5.1 =
 * New TinyMCE version updates
 = 1.4 =
